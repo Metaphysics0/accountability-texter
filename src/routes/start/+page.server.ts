@@ -1,4 +1,4 @@
-import type { Actions } from './$types';
+import type { Actions } from '../$types';
 import { TEST_PHONE_NUMBER, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN } from '$env/static/private';
 
 export const actions = {

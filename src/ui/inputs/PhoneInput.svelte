@@ -3,7 +3,7 @@
 	import type { CountryCode } from 'svelte-tel-input/types';
 
 	// Any Country Code Alpha-2 (ISO 3166)
-	let selectedCountry = 'US' as CountryCode;
+	let selectedCountry = 'IL' as CountryCode;
 
 	let value: string;
 
@@ -19,7 +19,7 @@
 	<select
 		class="country-select {!isValid && 'invalid'}"
 		aria-label="Default select example"
-		name="Country"
+		name="countryCode"
 		bind:value={selectedCountry}
 	>
 		<option value={null} hidden={selectedCountry !== null}>Please select</option>
@@ -34,7 +34,7 @@
 		{/each}
 	</select>
 	<TelInput
-		placeholder="562 123 1234"
+		placeholder="052 123 1234"
 		name="phone"
 		required
 		bind:valid={isValid}
