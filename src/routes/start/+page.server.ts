@@ -1,35 +1,45 @@
-import type { Actions } from '../$types';
 import { TEST_PHONE_NUMBER, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN } from '$env/static/private';
+import type { Actions } from './$types';
 
 export const actions = {
 	submit: async ({ request }) => {
 		const formData = await request.formData();
+		const phone = formData.get('phone');
+		const countryCode = formData.get('countryCode');
 
-		// TODO: Build the formatted params in the front-end!
-		//
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		const formattedPhone = formData.get('phone').split(' ').join('');
+		const formattedPhone = formatPhoneParam(phone, countryCode);
 
-		const urlParams = {
-			To: `+972${formattedPhone}`,
+		const requestBody = {
+			To: formattedPhone,
 			From: TEST_PHONE_NUMBER,
 			Body: 'I want you to: ' + formData.get('goal')
 		};
-
-		const betterParams = Object.entries(urlParams)
-			.map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-			.join('&');
 
 		await fetch(`https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/Messages.json`, {
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
 				Authorization: 'Basic ' + btoa(`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`)
 			},
-			body: betterParams,
+			body: encodeParams(requestBody),
 			method: 'POST'
 		});
 
 		return { success: true };
 	}
 } satisfies Actions;
+
+function encodeParams(params: Record<string, string>): string {
+	return Object.entries(params)
+		.map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+		.join('&');
+}
+function formatPhoneParam(
+	val: FormDataEntryValue | null,
+	countryCode: FormDataEntryValue | null
+): string {
+	if (!val || !countryCode) return '';
+
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	return `+${countryCode}` + val.replace(/\s/g, '');
+}
