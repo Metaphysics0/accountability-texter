@@ -49,6 +49,10 @@
 	.wrap {
 		display: flex;
 	}
+
+	.country-select {
+		padding-right: 5px;
+	}
 	select {
 		width: fit-content;
 	}

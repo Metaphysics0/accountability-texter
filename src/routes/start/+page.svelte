@@ -18,6 +18,9 @@
 </main>
 
 <style>
+	main {
+		padding: 20px;
+	}
 	.img-wrap {
 		display: flex;
 		align-items: center;

@@ -3,17 +3,12 @@
 		<h1>Be Accountable.</h1>
 		<p>Start receiving daily reminders today to help you reach your goals</p>
 		<p>
-			<a href="docs/" role="button" class="secondary" aria-label="Documentation">Get started</a>
-			<a
-				href="https://github.com/picocss/pico/archive/refs/tags/v1.5.9.zip"
-				role="button"
-				class="contrast outline"
-				aria-label="Download">Download</a
-			>
+			<a href="start/" role="button" class="secondary" aria-label="Documentation">Get started</a>
 		</p>
 	</div>
 </header>
-<main>
+
+<!-- <main>
 	<section>
 		<hgroup>
 			<h2>Let’s keep the webdesign graceful&nbsp;and&nbsp;simple!</h2>
@@ -23,7 +18,7 @@
 			</h3>
 		</hgroup>
 	</section>
-</main>
+</main> -->
 
 <style>
 	header h1 {

@@ -35,6 +35,7 @@
 	"type": "module",
 	"dependencies": {
 		"@picocss/pico": "^1.5.9",
-		"@prisma/client": "^4.13.0"
+		"@prisma/client": "^4.13.0",
+		"@vercel/edge": "^0.3.3"
 	}
 }

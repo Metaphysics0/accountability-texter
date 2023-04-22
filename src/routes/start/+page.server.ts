@@ -31,14 +31,14 @@ function getCreateUserParamsFromFormData(formData: FormData): Prisma.UserCreateI
 	const phoneNumber = formatPhoneParam(phone, countryCode);
 
 	const goal = formData.get('goal') as string;
-	const goalTargetDate = formData.get('targetDate') as string | Date;
-	const messageFrequency = formData.get('messageFrequency') as unknown as number;
+	const goalTargetDate = formData.get('targetDate') as string;
+	const messageFrequency = formData.get('messageFrequency') as string;
 
 	return {
 		phoneNumber,
 		goal,
-		goalTargetDate,
-		messageFrequency
+		goalTargetDate: new Date(goalTargetDate),
+		messageFrequency: Number(messageFrequency)
 	};
 }
 

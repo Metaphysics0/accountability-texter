@@ -1,7 +1,7 @@
 {
 	"crons": [
 		{
-			"path": "/src/routes/api/crons/twilioMessageSender",
+			"path": "/api/crons/twilio_message_sender",
 			"schedule": "0 5 * * *"
 		}
 	]
