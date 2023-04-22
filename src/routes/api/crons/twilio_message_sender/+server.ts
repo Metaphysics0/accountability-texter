@@ -1,7 +1,8 @@
 import { TEST_PHONE_NUMBER, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN } from '$env/static/private';
+import { PrismaClient } from '@prisma/client/edge';
 import { ipAddress, type RequestContext } from '@vercel/edge';
-import prisma from '$lib/server/prisma';
 
+const prisma = new PrismaClient();
 export const config = {
 	runtime: 'edge'
 };
