@@ -1,6 +1,5 @@
 import { TEST_PHONE_NUMBER, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN } from '$env/static/private';
 import prisma from '$lib/server/prisma';
-import type { User } from '@prisma/client/edge';
 import { ipAddress, type RequestContext } from '@vercel/edge';
 
 export const config = {
@@ -22,7 +21,7 @@ async function sendMessageToAllRelevantUsers(): Promise<void> {
 	relevantUsers.forEach(sendMessageToUser);
 }
 
-async function sendMessageToUser(user: User) {
+async function sendMessageToUser(user: any) {
 	const userParams = {
 		To: user.phoneNumber,
 		From: TEST_PHONE_NUMBER,
