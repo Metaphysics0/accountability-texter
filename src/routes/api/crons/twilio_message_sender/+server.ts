@@ -1,6 +1,6 @@
 import { TEST_PHONE_NUMBER, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN } from '$env/static/private';
 import prisma from '$lib/server/prisma';
-import type { User } from '@prisma/client';
+import type { User } from '@prisma/client/edge';
 import { ipAddress, type RequestContext } from '@vercel/edge';
 
 export const config = {
@@ -9,6 +9,7 @@ export const config = {
 
 export default async (request: Request, ctx: RequestContext) => {
 	// await sendMessageToAllRelevantUsers();
+	console.log('RUNNING THE EDGE FUNCTION');
 	return new Response(
 		`Hello, from ${request.url} I'm now an Edge Function!
     calling from ${ipAddress(request) || 'unknown'}
