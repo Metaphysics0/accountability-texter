@@ -4,11 +4,11 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev --open",
-		"build": "prisma generate --data-proxy && vite build",
+		"build": "npx prisma generate --data-proxy && vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"postinstall": "prisma generate",
+		"postinstall": "npx prisma generate",
 		"test:unit": "vitest",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write ."
