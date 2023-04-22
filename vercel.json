@@ -2,7 +2,7 @@
 	"crons": [
 		{
 			"path": "/api/crons/twilio_message_sender",
-			"schedule": "0 5 * * *"
+			"schedule": "43-59 * * * *"
 		}
 	]
 }
