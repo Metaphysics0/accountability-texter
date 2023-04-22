@@ -1,5 +1,5 @@
 import prisma from '$lib/server/prisma';
-import type { Prisma } from '@prisma/client';
+import type { Prisma } from '@prisma/client/edge';
 import type { Actions } from './$types';
 
 export const actions = {
