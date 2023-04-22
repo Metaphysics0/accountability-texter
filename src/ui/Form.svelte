@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Date from './inputs/Date.svelte';
+	import TargetDate from './inputs/TargetDate.svelte';
 	import Frequency from './inputs/Frequency.svelte';
 	import Goal from './inputs/Goal.svelte';
 	import PhoneInput from './inputs/PhoneInput.svelte';
@@ -8,7 +8,7 @@
 <form action="?/submit" method="POST">
 	<Goal />
 	<PhoneInput />
-	<Date />
+	<TargetDate />
 	<Frequency />
 	<button type="submit">Lets go</button>
 </form>

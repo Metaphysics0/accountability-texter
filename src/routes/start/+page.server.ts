@@ -1,45 +1,51 @@
-import { TEST_PHONE_NUMBER, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN } from '$env/static/private';
+import prisma from '$lib/server/prisma';
+import type { Prisma } from '@prisma/client';
 import type { Actions } from './$types';
 
 export const actions = {
 	submit: async ({ request }) => {
 		const formData = await request.formData();
-		const phone = formData.get('phone');
-		const countryCode = formData.get('countryCode');
-
-		const formattedPhone = formatPhoneParam(phone, countryCode);
-
-		const requestBody = {
-			To: formattedPhone,
-			From: TEST_PHONE_NUMBER,
-			Body: 'I want you to: ' + formData.get('goal')
-		};
-
-		await fetch(`https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/Messages.json`, {
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-				Authorization: 'Basic ' + btoa(`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`)
-			},
-			body: encodeParams(requestBody),
-			method: 'POST'
-		});
-
-		return { success: true };
+		try {
+			const params = getCreateUserParamsFromFormData(formData);
+			await prisma.user.create({
+				data: params
+			});
+			return { success: true };
+		} catch (error) {
+			console.error('Error creating user', error);
+			throw error;
+		}
 	}
 } satisfies Actions;
 
-function encodeParams(params: Record<string, string>): string {
-	return Object.entries(params)
-		.map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-		.join('&');
-}
-function formatPhoneParam(
-	val: FormDataEntryValue | null,
-	countryCode: FormDataEntryValue | null
-): string {
-	if (!val || !countryCode) return '';
+/* Param Methods */
+function getCreateUserParamsFromFormData(formData: FormData): Prisma.UserCreateInput {
+	// TODO: Switch these to required params
+	const phone = formData.get('phone');
+	const countryCode = formData.get('countryCode');
+	// const phone = requireParam<number>(formData, 'phone');
+	// const countryCode = requireParam<number>(formData, 'countryCode');
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	return `+${countryCode}` + val.replace(/\s/g, '');
+	const phoneNumber = formatPhoneParam(phone, countryCode);
+
+	const goal = formData.get('goal') as string;
+	const goalTargetDate = formData.get('targetDate') as string | Date;
+	const messageFrequency = formData.get('messageFrequency') as unknown as number;
+
+	return {
+		phoneNumber,
+		goal,
+		goalTargetDate,
+		messageFrequency
+	};
+}
+
+function formatPhoneParam(phoneNumber: number, countryCode: FormDataEntryValue | null): string {
+	if (!phoneNumber || !countryCode) return '';
+
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	return `+${countryCode}` + phoneNumber.replace(/\s/g, '');
 }
