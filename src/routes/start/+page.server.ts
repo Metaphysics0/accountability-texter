@@ -1,4 +1,8 @@
-import { TEST_PHONE_NUMBER, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN } from '$env/static/private';
+import {
+	TWILIO_TEST_PHONE_NUMBER,
+	TWILIO_ACCOUNT_SID,
+	TWILIO_AUTH_TOKEN
+} from '$env/static/private';
 import type { Actions } from './$types';
 
 export const actions = {
@@ -11,7 +15,7 @@ export const actions = {
 
 		const requestBody = {
 			To: formattedPhone,
-			From: TEST_PHONE_NUMBER,
+			From: TWILIO_TEST_PHONE_NUMBER,
 			Body: 'I want you to: ' + formData.get('goal')
 		};
 

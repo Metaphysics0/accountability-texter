@@ -32,6 +32,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@picocss/pico": "^1.5.9"
+		"@picocss/pico": "^1.5.9",
+		"twilio": "^4.10.0"
 	}
 }

@@ -8,6 +8,13 @@
 </script>
 
 <label for="targetDate"
-	>Target date
+	>3. Target date
+	<small> (when you hope to complete your goal) </small>
 	<input type="date" id="targetDate" name="targetDate" value={currentDate} min={currentDate} />
 </label>
+
+<style>
+	small {
+		opacity: 0.8;
+	}
+</style>

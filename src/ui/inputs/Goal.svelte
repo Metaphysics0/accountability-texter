@@ -1,4 +1,10 @@
 <label for="goal">
-	Goal
-	<input required type="text" name="goal" id="goal" placeholder="what i want to achive" />
+	1. Enter in a Goal
+	<input
+		required
+		type="text"
+		name="goal"
+		id="goal"
+		placeholder="Achieve the thing I've always wanted to"
+	/>
 </label>

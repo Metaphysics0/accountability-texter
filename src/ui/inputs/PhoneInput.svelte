@@ -14,7 +14,7 @@
 	let isValid: boolean = true;
 </script>
 
-<label for="phone"> Phone Number </label>
+<label for="phone">2. Enter in a Phone Number </label>
 <div class="wrap">
 	<select
 		class="country-select {!isValid && 'invalid'}"
